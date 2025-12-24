@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Selamat Ulang Tahun 🎉</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  overflow: hidden;
+}
+
+/* ===== HALAMAN ===== */
+.page {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 1s ease;
+}
+
+#page1 {
+  background: linear-gradient(to bottom, #ffecd2, #fcb69f);
+  flex-direction: column;
+}
+
+#page2 {
+  background: #fff;
+  transform: translateX(100%);
+  padding: 30px;
+}
+
+/* ===== COVER ===== */
+.cover img {
+  width: 250px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}
+
+.cover h1 {
+  margin-top: 20px;
+  font-size: 2.2em;
+}
+
+.cover button {
+  margin-top: 30px;
+  padding: 12px 25px;
+  border: none;
+  background: #ff6f61;
+  color: white;
+  font-size: 1em;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+/* ===== HALAMAN 2 ===== */
+.content {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  gap: 20px;
+}
+
+.surat {
+  flex: 1;
+  background: #f9f9f9;
+  padding: 25px;
+  border-radius: 15px;
+  overflow-y: auto;
+}
+
+.surat h2 {
+  margin-bottom: 15px;
+}
+
+.foto {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.foto img {
+  max-width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== HALAMAN 1 ===== -->
+<div class="page" id="page1">
+  <div class="cover">
+    <img src="kue.jpg" alt="Kue Ulang Tahun">
+    <h1>Selamat Ulang Tahun 🎉</h1>
+    <button onclick="bukaUcapan()">Buka Ucapan</button>
+  </div>
+</div>
+
+<!-- ===== HALAMAN 2 ===== -->
+<div class="page" id="page2">
+  <div class="content">
+    <div class="surat">
+      <h2>Untuk Kamu 💖</h2>
+      <p>
+        Selamat ulang tahun.  
+        Semoga di usia yang baru ini, kamu selalu diberikan kesehatan,
+        kebahagiaan, dan kemudahan dalam setiap langkah hidupmu.
+      </p>
+      <br>
+      <p>
+        Terima kasih telah menjadi pribadi yang luar biasa.
+        Semoga semua harapan baikmu satu per satu terwujud.
+      </p>
+      <br>
+      <p>
+        Tetaplah bersinar dan jangan pernah ragu mengejar mimpi ✨
+      </p>
+      <br>
+      <p><b>— Dari seseorang yang peduli</b></p>
+    </div>
+
+    <div class="foto">
+      <img src="foto.jpg" alt="Foto Kenangan">
+    </div>
+  </div>
+</div>
+
+<audio id="musik" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function bukaUcapan() {
+  document.getElementById("page1").style.transform = "translateX(-100%)";
+  document.getElementById("page2").style.transform = "translateX(0)";
+  document.getElementById("musik").play();
+}
+</script>
+
+</body>
+</html>
