@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Selamat Ulang Tahun 🎉</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
 * {
   margin: 0;
@@ -23,59 +24,72 @@ body {
   position: absolute;
   top: 0;
   left: 0;
+  transition: transform 1s ease;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 1s ease;
-}
-
-#page1 {
-  background: linear-gradient(to bottom, #ffecd2, #fcb69f);
-  flex-direction: column;
-}
-
-#page2 {
-  background: #fff;
-  transform: translateX(100%);
-  padding: 30px;
 }
 
 /* ===== COVER ===== */
-.cover img {
-  width: 250px;
-  animation: float 3s ease-in-out infinite;
+#cover {
+  background: linear-gradient(to bottom, #ffe5ec, #ffc2d1);
+  flex-direction: column;
+  text-align: center;
 }
 
-@keyframes float {
+#cover img {
+  width: 260px;
+  animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
   0% { transform: translateY(0); }
   50% { transform: translateY(-15px); }
   100% { transform: translateY(0); }
 }
 
-.cover h1 {
+#cover h1 {
   margin-top: 20px;
-  font-size: 2.2em;
+  font-size: 2.4em;
 }
 
-.cover button {
+#cover p {
+  margin-top: 10px;
+  color: #555;
+}
+
+.btn {
   margin-top: 30px;
-  padding: 12px 25px;
+  padding: 14px 32px;
+  font-size: 1.1em;
   border: none;
-  background: #ff6f61;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #ff6f61, #ff9472);
   color: white;
-  font-size: 1em;
-  border-radius: 25px;
   cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-/* ===== HALAMAN 2 ===== */
-.content {
+.btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+}
+
+/* ===== HALAMAN UCAPAN ===== */
+#ucapan {
+  background: #ffffff;
+  transform: translateX(100%);
+  padding: 25px;
+}
+
+.container {
   display: flex;
+  gap: 20px;
   width: 100%;
   height: 100%;
-  gap: 20px;
 }
 
+/* SURAT */
 .surat {
   flex: 1;
   background: #f9f9f9;
@@ -88,6 +102,7 @@ body {
   margin-bottom: 15px;
 }
 
+/* FOTO */
 .foto {
   flex: 1;
   display: flex;
@@ -98,40 +113,46 @@ body {
 .foto img {
   max-width: 100%;
   border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+/* RESPONSIVE */
+@media(max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ===== HALAMAN 1 ===== -->
-<div class="page" id="page1">
-  <div class="cover">
-    <img src="kue.jpg" alt="Kue Ulang Tahun">
-    <h1>Selamat Ulang Tahun 🎉</h1>
-    <button onclick="bukaUcapan()">Buka Ucapan</button>
-  </div>
+<!-- ===== COVER ===== -->
+<div class="page" id="cover">
+  <img src="kue.jpg" alt="Kue Ulang Tahun">
+  <h1>Selamat Ulang Tahun 🎉</h1>
+  <p>Klik tombol di bawah untuk membuka ucapan</p>
+  <button class="btn" onclick="lanjut()">🎁 Lanjutkan</button>
 </div>
 
-<!-- ===== HALAMAN 2 ===== -->
-<div class="page" id="page2">
-  <div class="content">
+<!-- ===== HALAMAN UCAPAN ===== -->
+<div class="page" id="ucapan">
+  <div class="container">
     <div class="surat">
       <h2>Untuk Kamu 💖</h2>
       <p>
         Selamat ulang tahun.  
-        Semoga di usia yang baru ini, kamu selalu diberikan kesehatan,
-        kebahagiaan, dan kemudahan dalam setiap langkah hidupmu.
+        Di hari istimewa ini, semoga kamu selalu diberikan kesehatan,
+        kebahagiaan, dan kekuatan dalam menjalani setiap langkah hidup.
       </p>
       <br>
       <p>
-        Terima kasih telah menjadi pribadi yang luar biasa.
-        Semoga semua harapan baikmu satu per satu terwujud.
+        Semoga segala doa baikmu satu per satu terwujud,
+        dan setiap harimu dipenuhi senyum serta rasa syukur.
       </p>
       <br>
       <p>
-        Tetaplah bersinar dan jangan pernah ragu mengejar mimpi ✨
+        Teruslah menjadi pribadi yang hebat dan menginspirasi ✨
       </p>
       <br>
       <p><b>— Dari seseorang yang peduli</b></p>
@@ -143,14 +164,15 @@ body {
   </div>
 </div>
 
+<!-- MUSIK -->
 <audio id="musik" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-function bukaUcapan() {
-  document.getElementById("page1").style.transform = "translateX(-100%)";
-  document.getElementById("page2").style.transform = "translateX(0)";
+function lanjut() {
+  document.getElementById("cover").style.transform = "translateX(-100%)";
+  document.getElementById("ucapan").style.transform = "translateX(0)";
   document.getElementById("musik").play();
 }
 </script>
