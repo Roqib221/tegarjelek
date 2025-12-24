@@ -1,220 +1,135 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy B’Day Tegar 🎉</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Ulang Tahun! 🎂</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap');
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
-html,body{width:100%;height:100%;overflow:hidden}
+        * { scroll-behavior: smooth; }
+        body { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; background: #fff5f5; color: #444; overflow-x: hidden; }
 
-/* MIDNIGHT */
-body{
-  background:radial-gradient(circle at top,#1e293b,#020617);
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
+        section { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; box-sizing: border-box; text-align: center; }
 
-/* SPARKLE */
-.spark{
-  position:fixed;
-  width:2px;height:2px;
-  background:white;
-  opacity:.7;
-  animation:twinkle 3s infinite;
-}
-@keyframes twinkle{
-  0%,100%{opacity:.3}
-  50%{opacity:1}
-}
+        /* --- COVER --- */
+        #cover { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); color: white; }
+        .cake-container { position: relative; width: 200px; height: 200px; cursor: pointer; margin: 20px 0; }
+        .candle { width: 16px; height: 50px; background: #fff; border-radius: 4px; position: absolute; left: 50%; top: 20%; transform: translateX(-50%); z-index: 2; border-bottom: 2px solid #ddd; }
+        .flame { width: 16px; height: 26px; background: #ffca28; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; position: absolute; top: -25px; left: 0; box-shadow: 0 0 15px #ffeb3b; animation: flicker 0.1s infinite alternate; }
+        .cake-body { width: 140px; height: 90px; background: #6d4c41; border-radius: 10px; position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%); border-top: 15px solid #f8bbd0; }
+        @keyframes flicker { from { transform: scale(1); opacity: 0.9; } to { transform: scale(1.1); opacity: 1; } }
 
-/* CONTAINER */
-.container{
-  text-align:center;
-  z-index:2;
-}
+        /* --- KARTU UCAPAN --- */
+        #card { background: white; }
+        .typing-box { font-family: 'Dancing Script', cursive; font-size: 1.8rem; color: #d63384; max-width: 600px; line-height: 1.6; min-height: 200px; padding: 20px; border: 2px dashed #f8bbd0; border-radius: 20px; }
 
-/* ===== CAKE ===== */
-.cake{
-  position:relative;
-  width:260px;
-  margin:auto;
-}
+        /* --- SLIDESHOW FOTO --- */
+        #photos { background: #fff0f3; }
+        .slider-window { width: 100%; max-width: 400px; height: 400px; overflow: hidden; border-radius: 20px; border: 8px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; }
+        .slides { display: flex; transition: transform 0.8s cubic-bezier(0.45, 0, 0.55, 1); height: 100%; }
+        .slides img { width: 100%; height: 100%; object-fit: cover; flex-shrink: 0; }
 
-/* TEXT ON CAKE */
-.cake-text{
-  position:absolute;
-  top:42px;
-  width:100%;
-  text-align:center;
-  font-weight:700;
-  color:#7c2d12;
-  font-size:1.1em;
-  z-index:4;
-}
-
-/* CANDLE */
-.candle{
-  position:absolute;
-  top:-45px;
-  left:50%;
-  transform:translateX(-50%);
-  width:12px;height:45px;
-  background:linear-gradient(#fff,#ddd);
-  border-radius:6px;
-  cursor:pointer;
-  z-index:5;
-}
-.flame{
-  position:absolute;
-  top:-18px;
-  left:50%;
-  transform:translateX(-50%);
-  width:16px;height:20px;
-  background:radial-gradient(circle,#ffd966,#ff7a00);
-  border-radius:50%;
-  animation:flicker .3s infinite;
-}
-@keyframes flicker{
-  0%{transform:translateX(-50%) scale(1)}
-  50%{transform:translateX(-50%) scale(.85)}
-  100%{transform:translateX(-50%) scale(1)}
-}
-
-/* LAYERS */
-.layer{
-  height:70px;
-  background:linear-gradient(#7c3aed,#4c1d95);
-  border-radius:18px;
-  margin-bottom:6px;
-  position:relative;
-  overflow:hidden;
-}
-.layer.top{
-  width:180px;
-  margin:0 auto 6px;
-  background:linear-gradient(#fde68a,#fbbf24);
-}
-
-/* ICING */
-.layer::before{
-  content:"";
-  position:absolute;
-  top:0;left:0;right:0;
-  height:18px;
-  background:#fbcfe8;
-  border-radius:0 0 18px 18px;
-}
-
-/* FIREWORKS */
-#fireworks{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:10;
-}
-.fire{
-  position:absolute;
-  width:6px;height:6px;
-  background:hsl(var(--h),90%,60%);
-  border-radius:50%;
-  animation:boom 1.2s ease-out forwards;
-}
-@keyframes boom{
-  to{
-    transform:translate(var(--dx),var(--dy));
-    opacity:0;
-  }
-}
-</style>
+        /* --- BUTTONS --- */
+        .btn { margin-top: 30px; padding: 15px 35px; background: #ff6b6b; color: white; border: none; border-radius: 50px; font-weight: 600; cursor: pointer; transition: 0.3s; text-decoration: none; display: inline-block; box-shadow: 0 4px 15px rgba(255,107,107,0.4); }
+        .btn:hover { background: #ee5253; transform: translateY(-3px); }
+        .hidden { display: none; opacity: 0; }
+        .show { display: inline-block; animation: fadeIn 1s forwards; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
 </head>
-
 <body>
 
-<div id="fireworks"></div>
+    <audio id="lagu" loop>
+        <source src="musik.mp3" type="audio/mpeg">
+    </audio>
 
-<!-- AUDIO (KEMBANG API) -->
-<audio id="fireSound" preload="auto">
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5c3b6f0c5f.mp3" type="audio/mpeg">
-</audio>
+    <section id="cover">
+        <h1 style="margin-bottom: 0;">Happy Birthday! ✨</h1>
+        <p>Sentuh lilinnya untuk meniup...</p>
+        
+        <div class="cake-container" onclick="tiupLilin()">
+            <div id="api" class="flame"></div>
+            <div class="candle"></div>
+            <div class="cake-body"></div>
+        </div>
 
-<div class="container">
-  <div class="cake">
-    <div class="cake-text">🎉 Happy B’Day Tegar 🎉</div>
+        <button id="btnKeUcapan" class="btn hidden" onclick="keHalaman('card')">Buka Pesan dari Aku 💌</button>
+    </section>
 
-    <div class="candle" onclick="blow()">
-      <div class="flame" id="flame"></div>
-    </div>
+    <section id="card">
+        <h2 style="color: #ff6b6b;">Untukmu...</h2>
+        <div id="teksUcapan" class="typing-box"></div>
+        <button id="btnKeFoto" class="btn hidden" onclick="keHalaman('photos'); mulaiSlide();">Lihat Foto Kenangan 📸</button>
+    </section>
 
-    <div class="layer top"></div>
-    <div class="layer"></div>
-    <div class="layer"></div>
-  </div>
+    <section id="photos">
+        <h2 style="margin-bottom: 20px;">Memory Lane</h2>
+        <div class="slider-window">
+            <div class="slides" id="slideTrack">
+                <img src="foto1.jpg" alt="Kenangan 1">
+                <img src="foto2.jpg" alt="Kenangan 2">
+                <img src="foto3.jpg" alt="Kenangan 3">
+                <img src="foto4.jpg" alt="Kenangan 4">
+                <img src="foto5.jpg" alt="Kenangan 5">
+                <img src="foto6.jpg" alt="Kenangan 6">
+                <img src="foto7.jpg" alt="Kenangan 7">
+                <img src="foto8.jpg" alt="Kenangan 8">
+            </div>
+        </div>
+        <p style="margin-top: 30px; font-style: italic;">"Terima kasih telah menjadi bagian dari ceritaku."</p>
+    </section>
 
-  <h1 style="margin-top:18px">Selamat Ulang Tahun 🎂</h1>
-</div>
+    <script>
+        const audio = document.getElementById('lagu');
+        const pesan = "Selamat ulang tahun ya! Di hari spesial ini, aku cuma mau bilang terima kasih sudah ada. Seperti lagu Barsena, semoga kamu selalu menemukan 'Ruang Baru' yang penuh dengan kebahagiaan, tawa, dan kesuksesan. Teruslah bersinar! ✨";
+        let i = 0;
 
-<script>
-/* ===== AUDIO UNLOCK (WAJIB AGAR ADA SUARA) ===== */
-let audioUnlocked=false;
-const sound=document.getElementById('fireSound');
+        function tiupLilin() {
+            // Matikan lilin
+            document.getElementById('api').style.display = 'none';
+            
+            // Suara Kembang Api (Visual)
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
 
-document.body.addEventListener('click',()=>{
-  if(!audioUnlocked){
-    sound.play().then(()=>{
-      sound.pause();
-      sound.currentTime=0;
-      audioUnlocked=true;
-    }).catch(()=>{});
-  }
-},{once:true});
+            // Putar Musik
+            audio.play();
 
-/* SPARKLES */
-for(let i=0;i<120;i++){
-  const s=document.createElement('div');
-  s.className='spark';
-  s.style.left=Math.random()*100+'%';
-  s.style.top=Math.random()*100+'%';
-  s.style.animationDelay=Math.random()*3+'s';
-  document.body.appendChild(s);
-}
+            // Tampilkan tombol lanjut
+            document.getElementById('btnKeUcapan').classList.add('show');
+        }
 
-/* CANDLE CLICK */
-function blow(){
-  document.getElementById('flame').style.display='none';
+        function keHalaman(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+            if(id === 'card') {
+                setTimeout(ketikTeks, 1000);
+            }
+        }
 
-  if(audioUnlocked){
-    sound.currentTime=0;
-    sound.volume=0.9;
-    sound.play();
-  }
+        function ketikTeks() {
+            if (i < pesan.length) {
+                document.getElementById("teksUcapan").innerHTML += pesan.charAt(i);
+                i++;
+                setTimeout(ketikTeks, 70); // Kecepatan ketik
+            } else {
+                document.getElementById('btnKeFoto').classList.add('show');
+            }
+        }
 
-  const fw=document.getElementById('fireworks');
-  const interval=setInterval(()=>{
-    const x=Math.random()*innerWidth;
-    const y=Math.random()*innerHeight/2;
-    for(let i=0;i<30;i++){
-      const p=document.createElement('div');
-      p.className='fire';
-      p.style.left=x+'px';
-      p.style.top=y+'px';
-      p.style.setProperty('--h',Math.random()*360);
-      p.style.setProperty('--dx',(Math.random()*220-110)+'px');
-      p.style.setProperty('--dy',(Math.random()*220-110)+'px');
-      fw.appendChild(p);
-      setTimeout(()=>p.remove(),1200);
-    }
-  },400);
-
-  setTimeout(()=>{
-    clearInterval(interval);
-    sound.pause();
-  },6000);
-}
-</script>
-
+        let slideIndex = 0;
+        function mulaiSlide() {
+            const track = document.getElementById('slideTrack');
+            setInterval(() => {
+                slideIndex++;
+                if (slideIndex > 7) slideIndex = 0;
+                track.style.transform = `translateX(-${slideIndex * 100}%)`;
+            }, 3000); // Ganti foto tiap 3 detik
+        }
+    </script>
 </body>
 </html>
