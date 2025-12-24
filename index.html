@@ -6,16 +6,17 @@
 <title>Happy Birthday 🎂</title>
 
 <style>
+/* RESET */
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
 html,body{width:100%;height:100%;overflow:hidden}
 
-/* ===== MIDNIGHT THEME ===== */
+/* MIDNIGHT THEME */
 body{
   background:radial-gradient(circle at top,#1b2745,#020617);
-  color:#e5e7eb;
+  color:#f9fafb;
 }
 
-/* ===== SPARKLES ===== */
+/* SPARKLES */
 #sparkles{position:fixed;inset:0;pointer-events:none;z-index:0}
 .spark{
   position:absolute;width:2px;height:2px;
@@ -24,7 +25,7 @@ body{
 }
 @keyframes twinkle{0%,100%{opacity:.2}50%{opacity:1}}
 
-/* ===== PAGE ===== */
+/* PAGE */
 .page{
   position:absolute;inset:0;
   display:flex;align-items:center;justify-content:center;
@@ -32,62 +33,75 @@ body{
 }
 #ucapan{transform:translateX(100%)}
 
-/* ===== COVER ===== */
-#cover{flex-direction:column;gap:25px}
+/* COVER */
+#cover{flex-direction:column;gap:30px}
 
-/* ===== 3D CAKE ===== */
+/* ===== REALISTIC 3D CAKE ===== */
 .scene{
-  width:200px;height:200px;
-  perspective:800px;
+  width:260px;height:260px;
+  perspective:1000px;
 }
-.cake3d{
+.cake{
   position:relative;
-  width:120px;height:80px;
+  width:100%;height:100%;
   transform-style:preserve-3d;
-  animation:spin 10s linear infinite;
+  animation:rotateCake 18s linear infinite;
 }
-@keyframes spin{
+@keyframes rotateCake{
   from{transform:rotateY(0deg)}
   to{transform:rotateY(360deg)}
 }
-.layer{
+.tier{
   position:absolute;
-  width:120px;height:80px;
-  background:#4c1d95;
-  border-radius:0 0 20px 20px;
-  transform:translateZ(0);
+  left:50%;
+  transform-style:preserve-3d;
+  border-radius:50%;
 }
-.top{
-  height:20px;
-  background:#a78bfa;
-  transform:translateZ(40px);
-  border-radius:20px 20px 10px 10px;
-}
-.side{
+.tier::before{
+  content:"";
   position:absolute;
-  width:40px;height:80px;
-  background:#6d28d9;
+  inset:0;
+  background:inherit;
+  border-radius:50%;
+  transform:translateZ(-40px);
+  filter:brightness(.8);
 }
-.side.left{transform:rotateY(90deg) translateZ(60px)}
-.side.right{transform:rotateY(-90deg) translateZ(60px)}
 
-/* ===== CANDLE ===== */
+/* TIERS */
+.tier1{
+  width:200px;height:80px;
+  background:linear-gradient(#4c1d95,#2e1065);
+  transform:translateX(-50%) translateY(150px);
+}
+.tier2{
+  width:150px;height:70px;
+  background:linear-gradient(#6d28d9,#4c1d95);
+  transform:translateX(-50%) translateY(95px);
+}
+.tier3{
+  width:100px;height:60px;
+  background:linear-gradient(#a78bfa,#7c3aed);
+  transform:translateX(-50%) translateY(50px);
+}
+
+/* CANDLE */
 .candle{
   position:absolute;
-  top:-35px;left:50%;
-  transform:translateX(-50%) translateZ(50px);
-  width:8px;height:35px;
-  background:#f9fafb;
+  top:15px;left:50%;
+  transform:translateX(-50%) translateZ(60px);
+  width:10px;height:45px;
+  background:linear-gradient(#fff,#ddd);
+  border-radius:5px;
   cursor:pointer;
 }
 .flame{
   position:absolute;
-  top:-18px;left:50%;
+  top:-20px;left:50%;
   transform:translateX(-50%);
-  width:14px;height:18px;
-  background:orange;
+  width:16px;height:20px;
+  background:radial-gradient(circle,#ffd966,#ff7a00);
   border-radius:50%;
-  animation:flicker .3s infinite;
+  animation:flicker .25s infinite;
 }
 @keyframes flicker{
   0%{transform:translateX(-50%) scale(1)}
@@ -95,7 +109,7 @@ body{
   100%{transform:translateX(-50%) scale(1)}
 }
 
-/* ===== BUTTON ===== */
+/* BUTTON */
 button{
   padding:12px 30px;
   border:none;border-radius:30px;
@@ -104,7 +118,7 @@ button{
   cursor:pointer;
 }
 
-/* ===== UCAPAN ===== */
+/* UCAPAN */
 .container{
   width:90%;max-width:900px;
   background:rgba(2,6,23,.85);
@@ -117,7 +131,6 @@ button{
   from{opacity:0;transform:scale(.9)}
   to{opacity:1;transform:scale(1)}
 }
-
 .surat{
   flex:1;
   background:rgba(17,24,39,.9);
@@ -128,20 +141,19 @@ button{
   0%,100%{transform:scale(1)}
   50%{transform:scale(1.01)}
 }
-
 .foto{
   flex:1;
   background:url('https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e') center/cover;
   border-radius:15px;
 }
 
-/* ===== TEXT EFFECT ===== */
+/* TEXT EFFECT */
 #nama span{opacity:0;animation:fadeIn .5s forwards}
 @keyframes fadeIn{to{opacity:1}}
 .line{opacity:0;margin-top:10px;animation:lineIn .6s forwards}
 @keyframes lineIn{to{opacity:1}}
 
-/* ===== CONFETTI ===== */
+/* CONFETTI */
 .confetti{
   position:fixed;
   width:8px;height:8px;
@@ -154,7 +166,7 @@ button{
   to{transform:translateY(110vh) rotate(360deg)}
 }
 
-/* ===== MOBILE ===== */
+/* MOBILE */
 @media(max-width:768px){
   .container{flex-direction:column}
 }
@@ -168,11 +180,10 @@ button{
 <!-- COVER -->
 <div class="page" id="cover">
   <div class="scene">
-    <div class="cake3d">
-      <div class="layer"></div>
-      <div class="top"></div>
-      <div class="side left"></div>
-      <div class="side right"></div>
+    <div class="cake">
+      <div class="tier tier1"></div>
+      <div class="tier tier2"></div>
+      <div class="tier tier3"></div>
 
       <div class="candle" onclick="blow()">
         <div class="flame" id="flame"></div>
@@ -215,22 +226,37 @@ function lanjut(){
   teksAnim();
 }
 
-/* CANDLE */
+/* CANDLE BLOW */
 function blow(){
   flame.style.display='none';
+  const smoke=document.createElement('div');
+  smoke.style.cssText=`
+    position:absolute;
+    top:-30px;left:50%;
+    width:20px;height:20px;
+    background:rgba(255,255,255,.6);
+    border-radius:50%;
+    animation:smoke 2s forwards;
+    transform:translateX(-50%);
+  `;
+  document.querySelector('.candle').appendChild(smoke);
+  setTimeout(()=>smoke.remove(),2000);
 }
+const style=document.createElement('style');
+style.innerHTML=`@keyframes smoke{to{transform:translateX(-50%) translateY(-40px) scale(2);opacity:0}}`;
+document.head.appendChild(style);
 
 /* NAME */
-const nama="Selamat Ulang Tahun 💜";
+const namaText="Selamat Ulang Tahun 💜";
+const namaEl=document.getElementById('nama');
 function namaAnim(){
-  [...nama].forEach((c,i)=>{
+  [...namaText].forEach((c,i)=>{
     const span=document.createElement('span');
     span.textContent=c;
     span.style.animationDelay=i*.15+'s';
     namaEl.appendChild(span);
   });
 }
-const namaEl=document.getElementById('nama');
 
 /* LETTER */
 const isi=[
