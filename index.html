@@ -3,96 +3,120 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday 🎂</title>
+<title>Selamat Ulang Tahun Tegar 🎉</title>
 
 <style>
-/* RESET */
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
 html,body{width:100%;height:100%;overflow:hidden}
 
-/* MIDNIGHT THEME */
+/* ===== MIDNIGHT THEME ===== */
 body{
   background:radial-gradient(circle at top,#1b2745,#020617);
   color:#f9fafb;
 }
 
-/* SPARKLES */
-#sparkles{position:fixed;inset:0;pointer-events:none;z-index:0}
-.spark{
-  position:absolute;width:2px;height:2px;
-  background:white;opacity:.8;
-  animation:twinkle 3s infinite ease-in-out;
+/* ===== SPARKLES ===== */
+#sparkles{
+  position:fixed;inset:0;
+  pointer-events:none;
+  z-index:0;
 }
-@keyframes twinkle{0%,100%{opacity:.2}50%{opacity:1}}
+.spark{
+  position:absolute;
+  width:2px;height:2px;
+  background:white;
+  opacity:.7;
+  animation:twinkle 3s infinite;
+}
+@keyframes twinkle{
+  0%,100%{opacity:.2}
+  50%{opacity:1}
+}
 
-/* PAGE */
+/* ===== PAGE ===== */
 .page{
   position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  transition:.8s ease;z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:.8s ease;
+  z-index:2;
 }
 #ucapan{transform:translateX(100%)}
 
-/* COVER */
-#cover{flex-direction:column;gap:30px}
-
-/* ===== REALISTIC 3D CAKE ===== */
-.scene{
-  width:260px;height:260px;
-  perspective:1000px;
+/* ===== COVER ===== */
+#cover{
+  flex-direction:column;
+  gap:20px;
+  text-align:center;
 }
+
+/* ===== MERIAH 2D CAKE ===== */
 .cake{
   position:relative;
-  width:100%;height:100%;
-  transform-style:preserve-3d;
-  animation:rotateCake 18s linear infinite;
+  width:240px;
+  margin-bottom:10px;
 }
-@keyframes rotateCake{
-  from{transform:rotateY(0deg)}
-  to{transform:rotateY(360deg)}
+
+/* layers */
+.layer{
+  position:relative;
+  height:65px;
+  background:linear-gradient(#7c3aed,#4c1d95);
+  border-radius:18px;
+  margin-bottom:6px;
+  overflow:hidden;
 }
-.tier{
-  position:absolute;
-  left:50%;
-  transform-style:preserve-3d;
-  border-radius:50%;
+.layer.top{
+  width:170px;
+  margin:0 auto 6px;
+  background:linear-gradient(#a78bfa,#7c3aed);
 }
-.tier::before{
+
+/* drip icing */
+.layer::before{
   content:"";
   position:absolute;
-  inset:0;
-  background:inherit;
+  top:0;left:0;right:0;
+  height:18px;
+  background:#fbcfe8;
+  border-radius:0 0 20px 20px;
+}
+.layer::after{
+  content:"";
+  position:absolute;
+  top:14px;left:10px;
+  width:10px;height:20px;
+  background:#fbcfe8;
+  border-radius:0 0 10px 10px;
+  box-shadow:
+    40px 5px #fbcfe8,
+    80px 0 #fbcfe8,
+    120px 6px #fbcfe8,
+    160px 2px #fbcfe8;
+}
+
+/* sprinkles */
+.sprinkle{
+  position:absolute;
+  width:6px;height:6px;
+  background:hsl(var(--h),80%,60%);
   border-radius:50%;
-  transform:translateZ(-40px);
-  filter:brightness(.8);
+  top:25px;
+  left:var(--x);
 }
 
-/* TIERS */
-.tier1{
-  width:200px;height:80px;
-  background:linear-gradient(#4c1d95,#2e1065);
-  transform:translateX(-50%) translateY(150px);
-}
-.tier2{
-  width:150px;height:70px;
-  background:linear-gradient(#6d28d9,#4c1d95);
-  transform:translateX(-50%) translateY(95px);
-}
-.tier3{
-  width:100px;height:60px;
-  background:linear-gradient(#a78bfa,#7c3aed);
-  transform:translateX(-50%) translateY(50px);
-}
-
-/* CANDLE */
+/* ===== CANDLE ===== */
 .candle{
   position:absolute;
-  top:15px;left:50%;
-  transform:translateX(-50%) translateZ(60px);
-  width:10px;height:45px;
+  top:-45px;
+  left:50%;
+  transform:translateX(-50%);
+  width:12px;height:45px;
   background:linear-gradient(#fff,#ddd);
-  border-radius:5px;
+  border-radius:6px;
   cursor:pointer;
+  z-index:5;
 }
 .flame{
   position:absolute;
@@ -101,7 +125,7 @@ body{
   width:16px;height:20px;
   background:radial-gradient(circle,#ffd966,#ff7a00);
   border-radius:50%;
-  animation:flicker .25s infinite;
+  animation:flicker .3s infinite;
 }
 @keyframes flicker{
   0%{transform:translateX(-50%) scale(1)}
@@ -109,66 +133,36 @@ body{
   100%{transform:translateX(-50%) scale(1)}
 }
 
-/* BUTTON */
+/* ===== BUTTON ===== */
 button{
   padding:12px 30px;
   border:none;border-radius:30px;
   background:#7c3aed;
-  color:white;font-size:1em;
+  color:white;
+  font-size:1em;
   cursor:pointer;
 }
 
-/* UCAPAN */
-.container{
-  width:90%;max-width:900px;
-  background:rgba(2,6,23,.85);
-  border-radius:20px;
-  padding:25px;
-  display:flex;gap:20px;
-  animation:popup 1s ease forwards;
-}
-@keyframes popup{
-  from{opacity:0;transform:scale(.9)}
-  to{opacity:1;transform:scale(1)}
-}
-.surat{
-  flex:1;
-  background:rgba(17,24,39,.9);
-  padding:20px;border-radius:15px;
-  animation:heartbeat 3s infinite;
-}
-@keyframes heartbeat{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.01)}
-}
-.foto{
-  flex:1;
-  background:url('https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e') center/cover;
-  border-radius:15px;
-}
-
-/* TEXT EFFECT */
-#nama span{opacity:0;animation:fadeIn .5s forwards}
-@keyframes fadeIn{to{opacity:1}}
-.line{opacity:0;margin-top:10px;animation:lineIn .6s forwards}
-@keyframes lineIn{to{opacity:1}}
-
-/* CONFETTI */
-.confetti{
+/* ===== FIREWORKS ===== */
+#fireworks{
   position:fixed;
-  width:8px;height:8px;
-  background:hsl(var(--h),80%,60%);
-  top:-10px;
-  animation:fall 3s linear forwards;
-  z-index:10;
+  inset:0;
+  pointer-events:none;
+  z-index:20;
 }
-@keyframes fall{
-  to{transform:translateY(110vh) rotate(360deg)}
+.firework{
+  position:absolute;
+  width:6px;height:6px;
+  background:hsl(var(--h),90%,60%);
+  border-radius:50%;
+  animation:explode 1.2s ease-out forwards;
 }
-
-/* MOBILE */
-@media(max-width:768px){
-  .container{flex-direction:column}
+@keyframes explode{
+  from{transform:translate(0,0);opacity:1}
+  to{
+    transform:translate(var(--dx),var(--dy));
+    opacity:0;
+  }
 }
 </style>
 </head>
@@ -176,38 +170,34 @@ button{
 <body>
 
 <div id="sparkles"></div>
+<div id="fireworks"></div>
 
-<!-- COVER -->
+<!-- ===== COVER ===== -->
 <div class="page" id="cover">
-  <div class="scene">
-    <div class="cake">
-      <div class="tier tier1"></div>
-      <div class="tier tier2"></div>
-      <div class="tier tier3"></div>
 
-      <div class="candle" onclick="blow()">
-        <div class="flame" id="flame"></div>
-      </div>
+  <div class="cake">
+    <div class="candle" onclick="blow()">
+      <div class="flame" id="flame"></div>
     </div>
+
+    <div class="layer top"></div>
+    <div class="layer"></div>
+    <div class="layer"></div>
   </div>
-  <button onclick="lanjut()">Lanjutkan 🎉</button>
+
+  <h1>🎉 Selamat Ulang Tahun</h1>
+  <h2 style="color:#c4b5fd">Tegar</h2>
+
+  <button onclick="lanjut()">Lanjutkan 🎁</button>
 </div>
 
-<!-- UCAPAN -->
+<!-- ===== UCAPAN ===== -->
 <div class="page" id="ucapan">
-  <div class="container">
-    <div class="surat">
-      <h2 id="nama"></h2>
-      <div id="teks"></div>
-    </div>
-    <div class="foto"></div>
-  </div>
+  <h2>Semoga harimu penuh kebahagiaan ✨</h2>
 </div>
-
-<audio id="musik" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
 
 <script>
-/* SPARKLES */
+/* ===== SPARKLES ===== */
 for(let i=0;i<120;i++){
   const s=document.createElement('div');
   s.className='spark';
@@ -217,76 +207,51 @@ for(let i=0;i<120;i++){
   sparkles.appendChild(s);
 }
 
-/* PAGE */
+/* ===== SPRINKLES ===== */
+document.querySelectorAll('.layer').forEach(layer=>{
+  for(let i=0;i<12;i++){
+    const sp=document.createElement('div');
+    sp.className='sprinkle';
+    sp.style.setProperty('--h',Math.random()*360);
+    sp.style.setProperty('--x',Math.random()*90+'%');
+    layer.appendChild(sp);
+  }
+});
+
+/* ===== PAGE ===== */
 function lanjut(){
   cover.style.transform='translateX(-100%)';
   ucapan.style.transform='translateX(0)';
-  musik.play();
-  namaAnim();
-  teksAnim();
 }
 
-/* CANDLE BLOW */
+/* ===== FIREWORKS ===== */
+function launchFireworks(){
+  const fw=document.getElementById('fireworks');
+  const interval=setInterval(()=>{
+    const cx=Math.random()*window.innerWidth;
+    const cy=Math.random()*window.innerHeight/2;
+    for(let i=0;i<30;i++){
+      const p=document.createElement('div');
+      p.className='firework';
+      p.style.left=cx+'px';
+      p.style.top=cy+'px';
+      p.style.setProperty('--h',Math.random()*360);
+      p.style.setProperty('--dx',(Math.random()*200-100)+'px');
+      p.style.setProperty('--dy',(Math.random()*200-100)+'px');
+      fw.appendChild(p);
+      setTimeout(()=>p.remove(),1200);
+    }
+  },400);
+
+  setTimeout(()=>clearInterval(interval),6000);
+}
+
+/* ===== CANDLE CLICK ===== */
 function blow(){
+  const flame=document.getElementById('flame');
   flame.style.display='none';
-  const smoke=document.createElement('div');
-  smoke.style.cssText=`
-    position:absolute;
-    top:-30px;left:50%;
-    width:20px;height:20px;
-    background:rgba(255,255,255,.6);
-    border-radius:50%;
-    animation:smoke 2s forwards;
-    transform:translateX(-50%);
-  `;
-  document.querySelector('.candle').appendChild(smoke);
-  setTimeout(()=>smoke.remove(),2000);
-}
-const style=document.createElement('style');
-style.innerHTML=`@keyframes smoke{to{transform:translateX(-50%) translateY(-40px) scale(2);opacity:0}}`;
-document.head.appendChild(style);
 
-/* NAME */
-const namaText="Selamat Ulang Tahun 💜";
-const namaEl=document.getElementById('nama');
-function namaAnim(){
-  [...namaText].forEach((c,i)=>{
-    const span=document.createElement('span');
-    span.textContent=c;
-    span.style.animationDelay=i*.15+'s';
-    namaEl.appendChild(span);
-  });
-}
-
-/* LETTER */
-const isi=[
-  "Hari ini adalah hari yang spesial.",
-  "Semoga semua doa baikmu dikabulkan.",
-  "Semoga langkahmu selalu diberkahi.",
-  "Terima kasih telah menjadi dirimu sendiri.",
-  "Jangan lupa bahagia 🤍"
-];
-function teksAnim(){
-  isi.forEach((t,i)=>{
-    const p=document.createElement('p');
-    p.className='line';
-    p.textContent=t;
-    p.style.animationDelay=(i+2)*.8+'s';
-    teks.appendChild(p);
-  });
-  setTimeout(confetti, isi.length*800+2000);
-}
-
-/* CONFETTI */
-function confetti(){
-  for(let i=0;i<150;i++){
-    const c=document.createElement('div');
-    c.className='confetti';
-    c.style.left=Math.random()*100+'%';
-    c.style.setProperty('--h',Math.random()*360);
-    document.body.appendChild(c);
-    setTimeout(()=>c.remove(),3000);
-  }
+  launchFireworks(); // 🎆 6 DETIK
 }
 </script>
 
