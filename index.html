@@ -3,77 +3,78 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Selamat Ulang Tahun Tegar 🎉</title>
+<title>Happy B’Day Tegar 🎉</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
 html,body{width:100%;height:100%;overflow:hidden}
 
-/* ===== MIDNIGHT THEME ===== */
+/* MIDNIGHT */
 body{
   background:radial-gradient(circle at top,#1b2745,#020617);
   color:#f9fafb;
 }
 
-/* ===== SPARKLES ===== */
-#sparkles{
-  position:fixed;inset:0;
-  pointer-events:none;
-  z-index:0;
-}
+/* SPARKLES */
+#sparkles{position:fixed;inset:0;pointer-events:none;z-index:0}
 .spark{
-  position:absolute;
-  width:2px;height:2px;
-  background:white;
-  opacity:.7;
+  position:absolute;width:2px;height:2px;
+  background:white;opacity:.7;
   animation:twinkle 3s infinite;
 }
-@keyframes twinkle{
-  0%,100%{opacity:.2}
-  50%{opacity:1}
-}
+@keyframes twinkle{0%,100%{opacity:.2}50%{opacity:1}}
 
-/* ===== PAGE ===== */
+/* PAGE */
 .page{
   position:absolute;inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display:flex;align-items:center;justify-content:center;
   transition:.8s ease;
   z-index:2;
 }
 #ucapan{transform:translateX(100%)}
 
-/* ===== COVER ===== */
+/* COVER */
 #cover{
   flex-direction:column;
-  gap:20px;
+  gap:18px;
   text-align:center;
 }
 
-/* ===== MERIAH 2D CAKE ===== */
+/* ===== CAKE 2D MERIAH ===== */
 .cake{
   position:relative;
-  width:240px;
-  margin-bottom:10px;
+  width:260px;
+}
+
+/* cake text */
+.cake-text{
+  position:absolute;
+  top:38px;
+  width:100%;
+  text-align:center;
+  font-weight:700;
+  font-size:1.05em;
+  color:#7c2d12;
+  z-index:3;
+  text-shadow:0 1px 2px rgba(255,255,255,.6);
 }
 
 /* layers */
 .layer{
   position:relative;
-  height:65px;
+  height:68px;
   background:linear-gradient(#7c3aed,#4c1d95);
   border-radius:18px;
   margin-bottom:6px;
   overflow:hidden;
 }
 .layer.top{
-  width:170px;
+  width:180px;
   margin:0 auto 6px;
-  background:linear-gradient(#a78bfa,#7c3aed);
+  background:linear-gradient(#fde68a,#fbbf24);
 }
 
-/* drip icing */
+/* icing drip */
 .layer::before{
   content:"";
   position:absolute;
@@ -85,15 +86,14 @@ body{
 .layer::after{
   content:"";
   position:absolute;
-  top:14px;left:10px;
-  width:10px;height:20px;
+  top:14px;left:12px;
+  width:12px;height:22px;
   background:#fbcfe8;
   border-radius:0 0 10px 10px;
   box-shadow:
-    40px 5px #fbcfe8,
-    80px 0 #fbcfe8,
-    120px 6px #fbcfe8,
-    160px 2px #fbcfe8;
+    45px 6px #fbcfe8,
+    90px 2px #fbcfe8,
+    135px 7px #fbcfe8;
 }
 
 /* sprinkles */
@@ -102,17 +102,17 @@ body{
   width:6px;height:6px;
   background:hsl(var(--h),80%,60%);
   border-radius:50%;
-  top:25px;
+  top:28px;
   left:var(--x);
 }
 
-/* ===== CANDLE ===== */
+/* CANDLE */
 .candle{
   position:absolute;
-  top:-45px;
+  top:-48px;
   left:50%;
   transform:translateX(-50%);
-  width:12px;height:45px;
+  width:12px;height:48px;
   background:linear-gradient(#fff,#ddd);
   border-radius:6px;
   cursor:pointer;
@@ -133,7 +133,7 @@ body{
   100%{transform:translateX(-50%) scale(1)}
 }
 
-/* ===== BUTTON ===== */
+/* BUTTON */
 button{
   padding:12px 30px;
   border:none;border-radius:30px;
@@ -143,7 +143,7 @@ button{
   cursor:pointer;
 }
 
-/* ===== FIREWORKS ===== */
+/* FIREWORKS */
 #fireworks{
   position:fixed;
   inset:0;
@@ -159,10 +159,7 @@ button{
 }
 @keyframes explode{
   from{transform:translate(0,0);opacity:1}
-  to{
-    transform:translate(var(--dx),var(--dy));
-    opacity:0;
-  }
+  to{transform:translate(var(--dx),var(--dy));opacity:0}
 }
 </style>
 </head>
@@ -172,10 +169,15 @@ button{
 <div id="sparkles"></div>
 <div id="fireworks"></div>
 
-<!-- ===== COVER ===== -->
+<!-- AUDIO -->
+<audio id="fireSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5c3b6f0c5f.mp3?filename=firework-explosion-6055.mp3"></audio>
+
+<!-- COVER -->
 <div class="page" id="cover">
 
   <div class="cake">
+    <div class="cake-text">Happy B’Day Tegar</div>
+
     <div class="candle" onclick="blow()">
       <div class="flame" id="flame"></div>
     </div>
@@ -191,13 +193,13 @@ button{
   <button onclick="lanjut()">Lanjutkan 🎁</button>
 </div>
 
-<!-- ===== UCAPAN ===== -->
+<!-- UCAPAN -->
 <div class="page" id="ucapan">
-  <h2>Semoga harimu penuh kebahagiaan ✨</h2>
+  <h2>Semoga hari ini penuh kebahagiaan ✨</h2>
 </div>
 
 <script>
-/* ===== SPARKLES ===== */
+/* SPARKLES */
 for(let i=0;i<120;i++){
   const s=document.createElement('div');
   s.className='spark';
@@ -207,9 +209,9 @@ for(let i=0;i<120;i++){
   sparkles.appendChild(s);
 }
 
-/* ===== SPRINKLES ===== */
+/* SPRINKLES */
 document.querySelectorAll('.layer').forEach(layer=>{
-  for(let i=0;i<12;i++){
+  for(let i=0;i<14;i++){
     const sp=document.createElement('div');
     sp.className='sprinkle';
     sp.style.setProperty('--h',Math.random()*360);
@@ -218,40 +220,45 @@ document.querySelectorAll('.layer').forEach(layer=>{
   }
 });
 
-/* ===== PAGE ===== */
+/* PAGE */
 function lanjut(){
   cover.style.transform='translateX(-100%)';
   ucapan.style.transform='translateX(0)';
 }
 
-/* ===== FIREWORKS ===== */
+/* FIREWORKS */
 function launchFireworks(){
   const fw=document.getElementById('fireworks');
+  const sound=document.getElementById('fireSound');
+  sound.currentTime=0;
+  sound.play();
+
   const interval=setInterval(()=>{
-    const cx=Math.random()*window.innerWidth;
-    const cy=Math.random()*window.innerHeight/2;
+    const cx=Math.random()*innerWidth;
+    const cy=Math.random()*innerHeight/2;
     for(let i=0;i<30;i++){
       const p=document.createElement('div');
       p.className='firework';
       p.style.left=cx+'px';
       p.style.top=cy+'px';
       p.style.setProperty('--h',Math.random()*360);
-      p.style.setProperty('--dx',(Math.random()*200-100)+'px');
-      p.style.setProperty('--dy',(Math.random()*200-100)+'px');
+      p.style.setProperty('--dx',(Math.random()*220-110)+'px');
+      p.style.setProperty('--dy',(Math.random()*220-110)+'px');
       fw.appendChild(p);
       setTimeout(()=>p.remove(),1200);
     }
   },400);
 
-  setTimeout(()=>clearInterval(interval),6000);
+  setTimeout(()=>{
+    clearInterval(interval);
+    sound.pause();
+  },6000);
 }
 
-/* ===== CANDLE CLICK ===== */
+/* CANDLE CLICK */
 function blow(){
-  const flame=document.getElementById('flame');
   flame.style.display='none';
-
-  launchFireworks(); // 🎆 6 DETIK
+  launchFireworks();
 }
 </script>
 
