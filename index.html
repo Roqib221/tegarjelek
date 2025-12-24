@@ -3,116 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy B’Day Tegar 🎉</title>
+<title>Happy Birthday Tegar 🎉</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
 html,body{width:100%;height:100%;overflow:hidden}
 
-/* MIDNIGHT */
+/* MIDNIGHT THEME */
 body{
-  background:radial-gradient(circle at top,#1b2745,#020617);
-  color:#f9fafb;
+  background:radial-gradient(circle at top,#1e293b,#020617);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-/* SPARKLES */
-#sparkles{position:fixed;inset:0;pointer-events:none;z-index:0}
+/* SPARKLE */
 .spark{
-  position:absolute;width:2px;height:2px;
-  background:white;opacity:.7;
+  position:fixed;
+  width:2px;height:2px;
+  background:white;
+  opacity:.7;
   animation:twinkle 3s infinite;
 }
-@keyframes twinkle{0%,100%{opacity:.2}50%{opacity:1}}
+@keyframes twinkle{
+  0%,100%{opacity:.3}
+  50%{opacity:1}
+}
 
-/* PAGE */
-.page{
-  position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  transition:.8s ease;
+/* CONTAINER */
+.container{
+  text-align:center;
   z-index:2;
 }
-#ucapan{transform:translateX(100%)}
 
-/* COVER */
-#cover{
-  flex-direction:column;
-  gap:18px;
-  text-align:center;
-}
-
-/* ===== CAKE 2D MERIAH ===== */
+/* ===== CAKE ===== */
 .cake{
   position:relative;
   width:260px;
+  margin:auto;
 }
 
-/* cake text */
+/* TEXT ON CAKE */
 .cake-text{
   position:absolute;
-  top:38px;
+  top:42px;
   width:100%;
   text-align:center;
   font-weight:700;
-  font-size:1.05em;
   color:#7c2d12;
-  z-index:3;
-  text-shadow:0 1px 2px rgba(255,255,255,.6);
-}
-
-/* layers */
-.layer{
-  position:relative;
-  height:68px;
-  background:linear-gradient(#7c3aed,#4c1d95);
-  border-radius:18px;
-  margin-bottom:6px;
-  overflow:hidden;
-}
-.layer.top{
-  width:180px;
-  margin:0 auto 6px;
-  background:linear-gradient(#fde68a,#fbbf24);
-}
-
-/* icing drip */
-.layer::before{
-  content:"";
-  position:absolute;
-  top:0;left:0;right:0;
-  height:18px;
-  background:#fbcfe8;
-  border-radius:0 0 20px 20px;
-}
-.layer::after{
-  content:"";
-  position:absolute;
-  top:14px;left:12px;
-  width:12px;height:22px;
-  background:#fbcfe8;
-  border-radius:0 0 10px 10px;
-  box-shadow:
-    45px 6px #fbcfe8,
-    90px 2px #fbcfe8,
-    135px 7px #fbcfe8;
-}
-
-/* sprinkles */
-.sprinkle{
-  position:absolute;
-  width:6px;height:6px;
-  background:hsl(var(--h),80%,60%);
-  border-radius:50%;
-  top:28px;
-  left:var(--x);
+  z-index:4;
+  font-size:1.1em;
 }
 
 /* CANDLE */
 .candle{
   position:absolute;
-  top:-48px;
+  top:-45px;
   left:50%;
   transform:translateX(-50%);
-  width:12px;height:48px;
+  width:12px;
+  height:45px;
   background:linear-gradient(#fff,#ddd);
   border-radius:6px;
   cursor:pointer;
@@ -120,9 +71,11 @@ body{
 }
 .flame{
   position:absolute;
-  top:-20px;left:50%;
+  top:-18px;
+  left:50%;
   transform:translateX(-50%);
-  width:16px;height:20px;
+  width:16px;
+  height:20px;
   background:radial-gradient(circle,#ffd966,#ff7a00);
   border-radius:50%;
   animation:flicker .3s infinite;
@@ -133,10 +86,37 @@ body{
   100%{transform:translateX(-50%) scale(1)}
 }
 
+/* LAYERS */
+.layer{
+  height:70px;
+  background:linear-gradient(#7c3aed,#4c1d95);
+  border-radius:18px;
+  margin-bottom:6px;
+  position:relative;
+  overflow:hidden;
+}
+.layer.top{
+  width:180px;
+  margin:0 auto 6px;
+  background:linear-gradient(#fde68a,#fbbf24);
+}
+
+/* ICING */
+.layer::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;
+  height:18px;
+  background:#fbcfe8;
+  border-radius:0 0 18px 18px;
+}
+
 /* BUTTON */
 button{
-  padding:12px 30px;
-  border:none;border-radius:30px;
+  margin-top:25px;
+  padding:12px 32px;
+  border:none;
+  border-radius:30px;
   background:#7c3aed;
   color:white;
   font-size:1em;
@@ -148,35 +128,34 @@ button{
   position:fixed;
   inset:0;
   pointer-events:none;
-  z-index:20;
+  z-index:10;
 }
-.firework{
+.fire{
   position:absolute;
   width:6px;height:6px;
   background:hsl(var(--h),90%,60%);
   border-radius:50%;
-  animation:explode 1.2s ease-out forwards;
+  animation:boom 1.2s ease-out forwards;
 }
-@keyframes explode{
-  from{transform:translate(0,0);opacity:1}
-  to{transform:translate(var(--dx),var(--dy));opacity:0}
+@keyframes boom{
+  to{
+    transform:translate(var(--dx),var(--dy));
+    opacity:0;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div id="sparkles"></div>
 <div id="fireworks"></div>
 
-<!-- AUDIO -->
-<audio id="fireSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5c3b6f0c5f.mp3?filename=firework-explosion-6055.mp3"></audio>
+<audio id="fireSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5c3b6f0c5f.mp3"></audio>
 
-<!-- COVER -->
-<div class="page" id="cover">
+<div class="container">
 
   <div class="cake">
-    <div class="cake-text">Happy B’Day Tegar</div>
+    <div class="cake-text">🎉 Happy B’Day Tegar 🎉</div>
 
     <div class="candle" onclick="blow()">
       <div class="flame" id="flame"></div>
@@ -187,15 +166,9 @@ button{
     <div class="layer"></div>
   </div>
 
-  <h1>🎉 Selamat Ulang Tahun</h1>
-  <h2 style="color:#c4b5fd">Tegar</h2>
+  <h1 style="margin-top:18px">Selamat Ulang Tahun 🎂</h1>
 
-  <button onclick="lanjut()">Lanjutkan 🎁</button>
-</div>
-
-<!-- UCAPAN -->
-<div class="page" id="ucapan">
-  <h2>Semoga hari ini penuh kebahagiaan ✨</h2>
+  <button>Semoga Bahagia ✨</button>
 </div>
 
 <script>
@@ -206,41 +179,25 @@ for(let i=0;i<120;i++){
   s.style.left=Math.random()*100+'%';
   s.style.top=Math.random()*100+'%';
   s.style.animationDelay=Math.random()*3+'s';
-  sparkles.appendChild(s);
+  document.body.appendChild(s);
 }
 
-/* SPRINKLES */
-document.querySelectorAll('.layer').forEach(layer=>{
-  for(let i=0;i<14;i++){
-    const sp=document.createElement('div');
-    sp.className='sprinkle';
-    sp.style.setProperty('--h',Math.random()*360);
-    sp.style.setProperty('--x',Math.random()*90+'%');
-    layer.appendChild(sp);
-  }
-});
-
-/* PAGE */
-function lanjut(){
-  cover.style.transform='translateX(-100%)';
-  ucapan.style.transform='translateX(0)';
-}
-
-/* FIREWORKS */
-function launchFireworks(){
+/* FIREWORK */
+function blow(){
+  document.getElementById('flame').style.display='none';
   const fw=document.getElementById('fireworks');
   const sound=document.getElementById('fireSound');
   sound.currentTime=0;
   sound.play();
 
   const interval=setInterval(()=>{
-    const cx=Math.random()*innerWidth;
-    const cy=Math.random()*innerHeight/2;
+    const x=Math.random()*innerWidth;
+    const y=Math.random()*innerHeight/2;
     for(let i=0;i<30;i++){
       const p=document.createElement('div');
-      p.className='firework';
-      p.style.left=cx+'px';
-      p.style.top=cy+'px';
+      p.className='fire';
+      p.style.left=x+'px';
+      p.style.top=y+'px';
       p.style.setProperty('--h',Math.random()*360);
       p.style.setProperty('--dx',(Math.random()*220-110)+'px');
       p.style.setProperty('--dy',(Math.random()*220-110)+'px');
@@ -253,12 +210,6 @@ function launchFireworks(){
     clearInterval(interval);
     sound.pause();
   },6000);
-}
-
-/* CANDLE CLICK */
-function blow(){
-  flame.style.display='none';
-  launchFireworks();
 }
 </script>
 
