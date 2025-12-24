@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Tegar 🎉</title>
+<title>Happy B’Day Tegar 🎉</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
 html,body{width:100%;height:100%;overflow:hidden}
 
-/* MIDNIGHT THEME */
+/* MIDNIGHT */
 body{
   background:radial-gradient(circle at top,#1e293b,#020617);
   color:white;
@@ -52,8 +52,8 @@ body{
   text-align:center;
   font-weight:700;
   color:#7c2d12;
-  z-index:4;
   font-size:1.1em;
+  z-index:4;
 }
 
 /* CANDLE */
@@ -62,8 +62,7 @@ body{
   top:-45px;
   left:50%;
   transform:translateX(-50%);
-  width:12px;
-  height:45px;
+  width:12px;height:45px;
   background:linear-gradient(#fff,#ddd);
   border-radius:6px;
   cursor:pointer;
@@ -74,8 +73,7 @@ body{
   top:-18px;
   left:50%;
   transform:translateX(-50%);
-  width:16px;
-  height:20px;
+  width:16px;height:20px;
   background:radial-gradient(circle,#ffd966,#ff7a00);
   border-radius:50%;
   animation:flicker .3s infinite;
@@ -111,18 +109,6 @@ body{
   border-radius:0 0 18px 18px;
 }
 
-/* BUTTON */
-button{
-  margin-top:25px;
-  padding:12px 32px;
-  border:none;
-  border-radius:30px;
-  background:#7c3aed;
-  color:white;
-  font-size:1em;
-  cursor:pointer;
-}
-
 /* FIREWORKS */
 #fireworks{
   position:fixed;
@@ -150,10 +136,12 @@ button{
 
 <div id="fireworks"></div>
 
-<audio id="fireSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5c3b6f0c5f.mp3"></audio>
+<!-- AUDIO (KEMBANG API) -->
+<audio id="fireSound" preload="auto">
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5c3b6f0c5f.mp3" type="audio/mpeg">
+</audio>
 
 <div class="container">
-
   <div class="cake">
     <div class="cake-text">🎉 Happy B’Day Tegar 🎉</div>
 
@@ -167,11 +155,23 @@ button{
   </div>
 
   <h1 style="margin-top:18px">Selamat Ulang Tahun 🎂</h1>
-
-  <button>Semoga Bahagia ✨</button>
 </div>
 
 <script>
+/* ===== AUDIO UNLOCK (WAJIB AGAR ADA SUARA) ===== */
+let audioUnlocked=false;
+const sound=document.getElementById('fireSound');
+
+document.body.addEventListener('click',()=>{
+  if(!audioUnlocked){
+    sound.play().then(()=>{
+      sound.pause();
+      sound.currentTime=0;
+      audioUnlocked=true;
+    }).catch(()=>{});
+  }
+},{once:true});
+
 /* SPARKLES */
 for(let i=0;i<120;i++){
   const s=document.createElement('div');
@@ -182,14 +182,17 @@ for(let i=0;i<120;i++){
   document.body.appendChild(s);
 }
 
-/* FIREWORK */
+/* CANDLE CLICK */
 function blow(){
   document.getElementById('flame').style.display='none';
-  const fw=document.getElementById('fireworks');
-  const sound=document.getElementById('fireSound');
-  sound.currentTime=0;
-  sound.play();
 
+  if(audioUnlocked){
+    sound.currentTime=0;
+    sound.volume=0.9;
+    sound.play();
+  }
+
+  const fw=document.getElementById('fireworks');
   const interval=setInterval(()=>{
     const x=Math.random()*innerWidth;
     const y=Math.random()*innerHeight/2;
