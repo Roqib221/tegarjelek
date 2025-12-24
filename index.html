@@ -2,191 +2,161 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Selamat Ulang Tahun 🎉</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday 🎂</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Segoe UI',sans-serif;
-  -webkit-tap-highlight-color:transparent;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+html,body{width:100%;height:100%;overflow:hidden}
 
+/* ===== MIDNIGHT THEME ===== */
 body{
-  overflow:hidden;
-  background:#fff;
-  transition:background 1s,color 1s;
+  background:radial-gradient(circle at top,#1b2745,#020617);
+  color:#e5e7eb;
 }
 
-/* ===== MODE GELAP ===== */
-body.dark{
-  background:linear-gradient(to bottom,#1a1a2e,#16213e);
-  color:#f5f5f5;
+/* ===== SPARKLES ===== */
+#sparkles{position:fixed;inset:0;pointer-events:none;z-index:0}
+.spark{
+  position:absolute;width:2px;height:2px;
+  background:white;opacity:.8;
+  animation:twinkle 3s infinite ease-in-out;
 }
-
-/* ===== SPARKLE ===== */
-#sparkles{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:0;
-}
-.sparkle{
-  position:absolute;
-  width:6px;
-  height:6px;
-  background:radial-gradient(circle,#fff,transparent);
-  animation:sparkle 3s linear infinite;
-}
-@keyframes sparkle{
-  0%{opacity:0;transform:translateY(100vh) scale(.5);}
-  50%{opacity:1;}
-  100%{opacity:0;transform:translateY(-10vh) scale(1);}
-}
+@keyframes twinkle{0%,100%{opacity:.2}50%{opacity:1}}
 
 /* ===== PAGE ===== */
 .page{
-  width:100vw;
-  height:100vh;
-  position:absolute;
-  top:0;
-  left:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  transition:transform 1s ease;
-  z-index:1;
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  transition:.8s ease;z-index:2;
 }
+#ucapan{transform:translateX(100%)}
 
 /* ===== COVER ===== */
-#cover{
-  background:linear-gradient(to bottom,#ffe5ec,#ffc2d1);
-  flex-direction:column;
-  text-align:center;
-}
+#cover{flex-direction:column;gap:25px}
 
-.cake{
+/* ===== 3D CAKE ===== */
+.scene{
+  width:200px;height:200px;
+  perspective:800px;
+}
+.cake3d{
   position:relative;
+  width:120px;height:80px;
+  transform-style:preserve-3d;
+  animation:spin 10s linear infinite;
 }
-.cake img{
-  width:260px;
-  animation:floating 3s ease-in-out infinite;
+@keyframes spin{
+  from{transform:rotateY(0deg)}
+  to{transform:rotateY(360deg)}
 }
-@keyframes floating{
-  0%{transform:translateY(0);}
-  50%{transform:translateY(-15px);}
-  100%{transform:translateY(0);}
+.layer{
+  position:absolute;
+  width:120px;height:80px;
+  background:#4c1d95;
+  border-radius:0 0 20px 20px;
+  transform:translateZ(0);
 }
+.top{
+  height:20px;
+  background:#a78bfa;
+  transform:translateZ(40px);
+  border-radius:20px 20px 10px 10px;
+}
+.side{
+  position:absolute;
+  width:40px;height:80px;
+  background:#6d28d9;
+}
+.side.left{transform:rotateY(90deg) translateZ(60px)}
+.side.right{transform:rotateY(-90deg) translateZ(60px)}
 
-/* lilin */
+/* ===== CANDLE ===== */
+.candle{
+  position:absolute;
+  top:-35px;left:50%;
+  transform:translateX(-50%) translateZ(50px);
+  width:8px;height:35px;
+  background:#f9fafb;
+  cursor:pointer;
+}
 .flame{
   position:absolute;
-  top:18px;
-  left:50%;
-  width:12px;
-  height:25px;
-  background:radial-gradient(circle,#fff176,#ff9800,transparent);
-  border-radius:50%;
+  top:-18px;left:50%;
   transform:translateX(-50%);
-  animation:flame .15s infinite alternate;
+  width:14px;height:18px;
+  background:orange;
+  border-radius:50%;
+  animation:flicker .3s infinite;
 }
-@keyframes flame{
-  from{transform:translateX(-50%) scale(1);opacity:.8;}
-  to{transform:translateX(-50%) scale(1.2);opacity:1;}
-}
-
-#cover h1{
-  margin-top:20px;
-  font-size:2.3em;
-}
-#cover p{
-  margin-top:10px;
-  color:#555;
+@keyframes flicker{
+  0%{transform:translateX(-50%) scale(1)}
+  50%{transform:translateX(-50%) scale(.85)}
+  100%{transform:translateX(-50%) scale(1)}
 }
 
-.btn{
-  margin-top:30px;
-  padding:14px 32px;
-  border:none;
-  border-radius:30px;
-  background:linear-gradient(135deg,#ff6f61,#ff9472);
-  color:#fff;
-  font-size:1.1em;
+/* ===== BUTTON ===== */
+button{
+  padding:12px 30px;
+  border:none;border-radius:30px;
+  background:#7c3aed;
+  color:white;font-size:1em;
   cursor:pointer;
-  transition:.3s;
-}
-.btn:hover{
-  transform:scale(1.08);
-  box-shadow:0 10px 20px rgba(0,0,0,.25);
 }
 
 /* ===== UCAPAN ===== */
-#ucapan{
-  transform:translateX(100%);
-  padding:25px;
-}
-
 .container{
-  display:flex;
-  gap:20px;
-  width:100%;
-  height:100%;
+  width:90%;max-width:900px;
+  background:rgba(2,6,23,.85);
+  border-radius:20px;
+  padding:25px;
+  display:flex;gap:20px;
   animation:popup 1s ease forwards;
 }
 @keyframes popup{
-  from{opacity:0;transform:scale(.85);}
-  to{opacity:1;transform:scale(1);}
+  from{opacity:0;transform:scale(.9)}
+  to{opacity:1;transform:scale(1)}
 }
 
 .surat{
   flex:1;
-  background:#f9f9f9;
-  padding:25px;
-  border-radius:15px;
-  overflow-y:auto;
-  animation:heartbeat 3s ease-in-out infinite;
+  background:rgba(17,24,39,.9);
+  padding:20px;border-radius:15px;
+  animation:heartbeat 3s infinite;
 }
-body.dark .surat{
-  background:rgba(255,255,255,.05);
-}
-
 @keyframes heartbeat{
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.01);}
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.01)}
 }
 
-/* teks muncul */
-.line{
-  opacity:0;
-  transform:translateY(15px);
-}
-.line.show{
-  animation:fadeUp .8s ease forwards;
-}
-@keyframes fadeUp{
-  to{opacity:1;transform:translateY(0);}
-}
-
-/* foto */
 .foto{
   flex:1;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-.foto img{
-  max-width:100%;
-  border-radius:20px;
-  box-shadow:0 12px 25px rgba(0,0,0,.2);
+  background:url('https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e') center/cover;
+  border-radius:15px;
 }
 
-/* MOBILE */
+/* ===== TEXT EFFECT ===== */
+#nama span{opacity:0;animation:fadeIn .5s forwards}
+@keyframes fadeIn{to{opacity:1}}
+.line{opacity:0;margin-top:10px;animation:lineIn .6s forwards}
+@keyframes lineIn{to{opacity:1}}
+
+/* ===== CONFETTI ===== */
+.confetti{
+  position:fixed;
+  width:8px;height:8px;
+  background:hsl(var(--h),80%,60%);
+  top:-10px;
+  animation:fall 3s linear forwards;
+  z-index:10;
+}
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(360deg)}
+}
+
+/* ===== MOBILE ===== */
 @media(max-width:768px){
-  .container{flex-direction:column;}
-  #cover h1{font-size:1.8em;}
-  .btn{font-size:1em;padding:12px 26px;}
+  .container{flex-direction:column}
 }
 </style>
 </head>
@@ -197,13 +167,19 @@ body.dark .surat{
 
 <!-- COVER -->
 <div class="page" id="cover">
-  <div class="cake">
-    <img src="kue.jpg">
-    <div class="flame"></div>
+  <div class="scene">
+    <div class="cake3d">
+      <div class="layer"></div>
+      <div class="top"></div>
+      <div class="side left"></div>
+      <div class="side right"></div>
+
+      <div class="candle" onclick="blow()">
+        <div class="flame" id="flame"></div>
+      </div>
+    </div>
   </div>
-  <h1>Selamat Ulang Tahun 🎉</h1>
-  <p>Klik tombol di bawah untuk melanjutkan</p>
-  <button class="btn" onclick="lanjut()">🎁 Lanjutkan</button>
+  <button onclick="lanjut()">Lanjutkan 🎉</button>
 </div>
 
 <!-- UCAPAN -->
@@ -211,62 +187,80 @@ body.dark .surat{
   <div class="container">
     <div class="surat">
       <h2 id="nama"></h2>
-
-      <p class="line">Selamat ulang tahun.</p>
-      <p class="line">Semoga setiap langkahmu dipenuhi kebahagiaan dan kesehatan.</p>
-      <p class="line">Semoga semua doa baikmu satu per satu terwujud.</p>
-      <p class="line">Teruslah bersinar dan jangan pernah berhenti bermimpi ✨</p>
-      <p class="line"><b>— Dari seseorang yang peduli</b></p>
+      <div id="teks"></div>
     </div>
-
-    <div class="foto">
-      <img src="foto.jpg">
-    </div>
+    <div class="foto"></div>
   </div>
 </div>
 
-<audio id="musik" loop>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
+<audio id="musik" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
 
 <script>
-/* sparkle */
-function sparkle(){
-  const s=document.createElement("div");
-  s.className="sparkle";
-  s.style.left=Math.random()*100+"vw";
-  s.style.animationDuration=(2+Math.random()*3)+"s";
-  document.getElementById("sparkles").appendChild(s);
-  setTimeout(()=>s.remove(),5000);
-}
-setInterval(sparkle,300);
-
-/* typing nama */
-const teks="Untuk Kamu 💖";
-let i=0;
-function ketikNama(){
-  if(i<teks.length){
-    document.getElementById("nama").innerHTML+=teks.charAt(i);
-    i++;
-    setTimeout(ketikNama,100);
-  }
+/* SPARKLES */
+for(let i=0;i<120;i++){
+  const s=document.createElement('div');
+  s.className='spark';
+  s.style.left=Math.random()*100+'%';
+  s.style.top=Math.random()*100+'%';
+  s.style.animationDelay=Math.random()*3+'s';
+  sparkles.appendChild(s);
 }
 
-/* surat muncul */
-function tampilkanSurat(){
-  document.querySelectorAll(".line").forEach((l,i)=>{
-    setTimeout(()=>l.classList.add("show"),i*700);
+/* PAGE */
+function lanjut(){
+  cover.style.transform='translateX(-100%)';
+  ucapan.style.transform='translateX(0)';
+  musik.play();
+  namaAnim();
+  teksAnim();
+}
+
+/* CANDLE */
+function blow(){
+  flame.style.display='none';
+}
+
+/* NAME */
+const nama="Selamat Ulang Tahun 💜";
+function namaAnim(){
+  [...nama].forEach((c,i)=>{
+    const span=document.createElement('span');
+    span.textContent=c;
+    span.style.animationDelay=i*.15+'s';
+    namaEl.appendChild(span);
   });
 }
+const namaEl=document.getElementById('nama');
 
-/* lanjut */
-function lanjut(){
-  document.body.classList.add("dark");
-  document.getElementById("cover").style.transform="translateX(-100%)";
-  document.getElementById("ucapan").style.transform="translateX(0)";
-  document.getElementById("musik").play();
-  ketikNama();
-  tampilkanSurat();
+/* LETTER */
+const isi=[
+  "Hari ini adalah hari yang spesial.",
+  "Semoga semua doa baikmu dikabulkan.",
+  "Semoga langkahmu selalu diberkahi.",
+  "Terima kasih telah menjadi dirimu sendiri.",
+  "Jangan lupa bahagia 🤍"
+];
+function teksAnim(){
+  isi.forEach((t,i)=>{
+    const p=document.createElement('p');
+    p.className='line';
+    p.textContent=t;
+    p.style.animationDelay=(i+2)*.8+'s';
+    teks.appendChild(p);
+  });
+  setTimeout(confetti, isi.length*800+2000);
+}
+
+/* CONFETTI */
+function confetti(){
+  for(let i=0;i<150;i++){
+    const c=document.createElement('div');
+    c.className='confetti';
+    c.style.left=Math.random()*100+'%';
+    c.style.setProperty('--h',Math.random()*360);
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),3000);
+  }
 }
 </script>
 
