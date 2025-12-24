@@ -6,174 +6,267 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+  -webkit-tap-highlight-color:transparent;
 }
 
-body {
-  overflow: hidden;
+body{
+  overflow:hidden;
+  background:#fff;
+  transition:background 1s,color 1s;
 }
 
-/* ===== HALAMAN ===== */
-.page {
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: transform 1s ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* ===== MODE GELAP ===== */
+body.dark{
+  background:linear-gradient(to bottom,#1a1a2e,#16213e);
+  color:#f5f5f5;
+}
+
+/* ===== SPARKLE ===== */
+#sparkles{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+}
+.sparkle{
+  position:absolute;
+  width:6px;
+  height:6px;
+  background:radial-gradient(circle,#fff,transparent);
+  animation:sparkle 3s linear infinite;
+}
+@keyframes sparkle{
+  0%{opacity:0;transform:translateY(100vh) scale(.5);}
+  50%{opacity:1;}
+  100%{opacity:0;transform:translateY(-10vh) scale(1);}
+}
+
+/* ===== PAGE ===== */
+.page{
+  width:100vw;
+  height:100vh;
+  position:absolute;
+  top:0;
+  left:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  transition:transform 1s ease;
+  z-index:1;
 }
 
 /* ===== COVER ===== */
-#cover {
-  background: linear-gradient(to bottom, #ffe5ec, #ffc2d1);
-  flex-direction: column;
-  text-align: center;
+#cover{
+  background:linear-gradient(to bottom,#ffe5ec,#ffc2d1);
+  flex-direction:column;
+  text-align:center;
 }
 
-#cover img {
-  width: 260px;
-  animation: floating 3s ease-in-out infinite;
+.cake{
+  position:relative;
+}
+.cake img{
+  width:260px;
+  animation:floating 3s ease-in-out infinite;
+}
+@keyframes floating{
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-15px);}
+  100%{transform:translateY(0);}
 }
 
-@keyframes floating {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-  100% { transform: translateY(0); }
+/* lilin */
+.flame{
+  position:absolute;
+  top:18px;
+  left:50%;
+  width:12px;
+  height:25px;
+  background:radial-gradient(circle,#fff176,#ff9800,transparent);
+  border-radius:50%;
+  transform:translateX(-50%);
+  animation:flame .15s infinite alternate;
+}
+@keyframes flame{
+  from{transform:translateX(-50%) scale(1);opacity:.8;}
+  to{transform:translateX(-50%) scale(1.2);opacity:1;}
 }
 
-#cover h1 {
-  margin-top: 20px;
-  font-size: 2.4em;
+#cover h1{
+  margin-top:20px;
+  font-size:2.3em;
+}
+#cover p{
+  margin-top:10px;
+  color:#555;
 }
 
-#cover p {
-  margin-top: 10px;
-  color: #555;
+.btn{
+  margin-top:30px;
+  padding:14px 32px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(135deg,#ff6f61,#ff9472);
+  color:#fff;
+  font-size:1.1em;
+  cursor:pointer;
+  transition:.3s;
+}
+.btn:hover{
+  transform:scale(1.08);
+  box-shadow:0 10px 20px rgba(0,0,0,.25);
 }
 
-.btn {
-  margin-top: 30px;
-  padding: 14px 32px;
-  font-size: 1.1em;
-  border: none;
-  border-radius: 30px;
-  background: linear-gradient(135deg, #ff6f61, #ff9472);
-  color: white;
-  cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
+/* ===== UCAPAN ===== */
+#ucapan{
+  transform:translateX(100%);
+  padding:25px;
 }
 
-.btn:hover {
-  transform: scale(1.08);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+.container{
+  display:flex;
+  gap:20px;
+  width:100%;
+  height:100%;
+  animation:popup 1s ease forwards;
+}
+@keyframes popup{
+  from{opacity:0;transform:scale(.85);}
+  to{opacity:1;transform:scale(1);}
 }
 
-/* ===== HALAMAN UCAPAN ===== */
-#ucapan {
-  background: #ffffff;
-  transform: translateX(100%);
-  padding: 25px;
+.surat{
+  flex:1;
+  background:#f9f9f9;
+  padding:25px;
+  border-radius:15px;
+  overflow-y:auto;
+  animation:heartbeat 3s ease-in-out infinite;
+}
+body.dark .surat{
+  background:rgba(255,255,255,.05);
 }
 
-.container {
-  display: flex;
-  gap: 20px;
-  width: 100%;
-  height: 100%;
+@keyframes heartbeat{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.01);}
 }
 
-/* SURAT */
-.surat {
-  flex: 1;
-  background: #f9f9f9;
-  padding: 25px;
-  border-radius: 15px;
-  overflow-y: auto;
+/* teks muncul */
+.line{
+  opacity:0;
+  transform:translateY(15px);
+}
+.line.show{
+  animation:fadeUp .8s ease forwards;
+}
+@keyframes fadeUp{
+  to{opacity:1;transform:translateY(0);}
 }
 
-.surat h2 {
-  margin-bottom: 15px;
+/* foto */
+.foto{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.foto img{
+  max-width:100%;
+  border-radius:20px;
+  box-shadow:0 12px 25px rgba(0,0,0,.2);
 }
 
-/* FOTO */
-.foto {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.foto img {
-  max-width: 100%;
-  border-radius: 20px;
-  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
-}
-
-/* RESPONSIVE */
-@media(max-width: 768px) {
-  .container {
-    flex-direction: column;
-  }
+/* MOBILE */
+@media(max-width:768px){
+  .container{flex-direction:column;}
+  #cover h1{font-size:1.8em;}
+  .btn{font-size:1em;padding:12px 26px;}
 }
 </style>
 </head>
 
 <body>
 
-<!-- ===== COVER ===== -->
+<div id="sparkles"></div>
+
+<!-- COVER -->
 <div class="page" id="cover">
-  <img src="kue.jpg" alt="Kue Ulang Tahun">
+  <div class="cake">
+    <img src="kue.jpg">
+    <div class="flame"></div>
+  </div>
   <h1>Selamat Ulang Tahun 🎉</h1>
-  <p>Klik tombol di bawah untuk membuka ucapan</p>
+  <p>Klik tombol di bawah untuk melanjutkan</p>
   <button class="btn" onclick="lanjut()">🎁 Lanjutkan</button>
 </div>
 
-<!-- ===== HALAMAN UCAPAN ===== -->
+<!-- UCAPAN -->
 <div class="page" id="ucapan">
   <div class="container">
     <div class="surat">
-      <h2>Untuk Kamu 💖</h2>
-      <p>
-        Selamat ulang tahun.  
-        Di hari istimewa ini, semoga kamu selalu diberikan kesehatan,
-        kebahagiaan, dan kekuatan dalam menjalani setiap langkah hidup.
-      </p>
-      <br>
-      <p>
-        Semoga segala doa baikmu satu per satu terwujud,
-        dan setiap harimu dipenuhi senyum serta rasa syukur.
-      </p>
-      <br>
-      <p>
-        Teruslah menjadi pribadi yang hebat dan menginspirasi ✨
-      </p>
-      <br>
-      <p><b>— Dari seseorang yang peduli</b></p>
+      <h2 id="nama"></h2>
+
+      <p class="line">Selamat ulang tahun.</p>
+      <p class="line">Semoga setiap langkahmu dipenuhi kebahagiaan dan kesehatan.</p>
+      <p class="line">Semoga semua doa baikmu satu per satu terwujud.</p>
+      <p class="line">Teruslah bersinar dan jangan pernah berhenti bermimpi ✨</p>
+      <p class="line"><b>— Dari seseorang yang peduli</b></p>
     </div>
 
     <div class="foto">
-      <img src="foto.jpg" alt="Foto Kenangan">
+      <img src="foto.jpg">
     </div>
   </div>
 </div>
 
-<!-- MUSIK -->
 <audio id="musik" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-function lanjut() {
-  document.getElementById("cover").style.transform = "translateX(-100%)";
-  document.getElementById("ucapan").style.transform = "translateX(0)";
+/* sparkle */
+function sparkle(){
+  const s=document.createElement("div");
+  s.className="sparkle";
+  s.style.left=Math.random()*100+"vw";
+  s.style.animationDuration=(2+Math.random()*3)+"s";
+  document.getElementById("sparkles").appendChild(s);
+  setTimeout(()=>s.remove(),5000);
+}
+setInterval(sparkle,300);
+
+/* typing nama */
+const teks="Untuk Kamu 💖";
+let i=0;
+function ketikNama(){
+  if(i<teks.length){
+    document.getElementById("nama").innerHTML+=teks.charAt(i);
+    i++;
+    setTimeout(ketikNama,100);
+  }
+}
+
+/* surat muncul */
+function tampilkanSurat(){
+  document.querySelectorAll(".line").forEach((l,i)=>{
+    setTimeout(()=>l.classList.add("show"),i*700);
+  });
+}
+
+/* lanjut */
+function lanjut(){
+  document.body.classList.add("dark");
+  document.getElementById("cover").style.transform="translateX(-100%)";
+  document.getElementById("ucapan").style.transform="translateX(0)";
   document.getElementById("musik").play();
+  ketikNama();
+  tampilkanSurat();
 }
 </script>
 
